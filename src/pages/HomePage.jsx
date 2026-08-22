@@ -14,8 +14,24 @@ import imgAarti from '../assets/story_aarti.png';
 
 export function HomePage() {
   const container = useRef(null);
+  const bannerScrollRef = useRef(null);
   const { products, categories, loading } = useStoreData();
   const [banners, setBanners] = React.useState([]);
+
+  React.useEffect(() => {
+    if (!banners || banners.length <= 1) return;
+    const interval = setInterval(() => {
+      if (bannerScrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = bannerScrollRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          bannerScrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          bannerScrollRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
+        }
+      }
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [banners]);
 
   React.useEffect(() => {
     const url = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api";
@@ -45,21 +61,21 @@ export function HomePage() {
       {/* 1. Hero Banner Carousel */}
       <div className="animate-section px-4 md:px-6 mb-8 max-w-[1280px] mx-auto mt-2 md:mt-4">
         {banners.length > 0 ? (
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 mt-6">
+          <div ref={bannerScrollRef} className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 mt-6">
             {banners.map((banner) => (
-              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[260px] sm:h-[320px] md:h-[480px] group">
+              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[200px] sm:h-[260px] md:h-[380px] group">
                 {/* Background image with subtle zoom on hover */}
-                <img src={banner.image_url} alt={banner.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out" />
+                <img src={banner.image_url} alt={banner.title} className="w-full h-full object-contain object-center bg-white group-hover:scale-105 transition-all duration-700 ease-out" />
                 
                 {/* Text Container */}
                 <div className="absolute left-4 sm:left-10 md:left-20 top-1/2 -translate-y-1/2 max-w-2xl">
                   
-                  <h2 className="text-gray-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 md:mb-6 leading-[1.1] tracking-tight">
+                  <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 md:mb-4 leading-[1.1] tracking-tight">
                     {banner.title}
                   </h2>
                   {(banner.link_url || banner.link_url === '') && (
-                    <Link to={banner.link_url || "/category/all"} className="bg-brand-blue text-white text-sm md:text-base lg:text-lg font-bold px-6 md:px-10 py-3 rounded-xl w-fit hover:scale-105 hover:bg-blue-700 transition-all flex items-center gap-3 group/btn">
-                       Shop Now <span className="text-xl group-hover/btn:translate-x-1 transition-transform">→</span>
+                    <Link to={banner.link_url || "/category/all"} className="bg-brand-blue text-white text-xs md:text-sm lg:text-base font-bold px-4 md:px-6 py-2 md:py-2.5 rounded-xl w-fit hover:scale-105 hover:bg-blue-700 transition-all flex items-center gap-2 group/btn">
+                       Shop Now <span className="text-base md:text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
                     </Link>
                   )}
                 </div>
@@ -67,23 +83,23 @@ export function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="relative w-full rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[260px] sm:h-[320px] md:h-[480px] mt-6 group">
+          <div className="relative w-full rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[200px] sm:h-[260px] md:h-[380px] mt-6 group">
             {/* Fallback Image */}
-            <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out" />
+            <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-contain object-center bg-white group-hover:scale-105 transition-all duration-700 ease-out" />
             
             {/* Text Container */}
             <div className="absolute left-4 sm:left-10 md:left-20 top-1/2 -translate-y-1/2 max-w-xl">
               
-              <h2 className="text-brand-blue text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 md:mb-5 leading-[1.1] tracking-tight">
+              <h2 className="text-brand-blue text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 md:mb-4 leading-[1.1] tracking-tight">
                 SHOP SMART.<br/><span className="text-brand-orange">LIVE BETTER.</span>
               </h2>
               <p className="text-gray-800 font-medium mb-6 text-sm sm:text-base md:text-lg hidden sm:block leading-relaxed">
                 Top quality products. Best prices. Fast delivery.
               </p>
               
-              <Link to="/category/all" className="group/btn bg-brand-blue text-white text-sm md:text-base lg:text-lg font-bold px-6 md:px-10 py-3 rounded-xl w-fit hover:bg-blue-700 hover:scale-105 transition-all flex items-center gap-4">
+              <Link to="/category/all" className="group/btn bg-brand-blue text-white text-xs md:text-sm lg:text-base font-bold px-4 md:px-6 py-2 md:py-2.5 rounded-xl w-fit hover:bg-blue-700 hover:scale-105 transition-all flex items-center gap-2">
                 <span>Shop Now</span> 
-                <span className="text-white leading-none font-bold text-xl group-hover/btn:translate-x-1 transition-transform">→</span>
+                <span className="text-white leading-none font-bold text-base md:text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
           </div>
@@ -92,6 +108,7 @@ export function HomePage() {
 
       {/* 2. Categories Grid */}
       <div className="animate-section z-30 mb-8 mt-4 max-w-[1280px] mx-auto px-4 md:px-6 w-full">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 px-2">Shop by Category</h2>
         <div className="bg-white rounded-3xl md:rounded-[2rem] shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-gray-100 p-4 md:p-8">
           <div className="grid grid-cols-5 gap-y-6 md:gap-y-8 gap-x-2 md:gap-x-4">
             {categories.map(cat => (

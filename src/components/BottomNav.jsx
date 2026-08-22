@@ -13,7 +13,7 @@ export function BottomNav() {
 
   const tabs = [
     { name: 'Home', icon: Home, path: '/' },
-    { name: 'Categories', icon: LayoutGrid, path: '/category/all' },
+    { name: 'Shop by Category', icon: LayoutGrid, path: '/category/all' },
     { name: 'Cart', icon: ShoppingCart, path: '/cart' },
     { name: 'Orders', icon: Package, path: '/my-orders' },
     { name: 'Account', icon: CircleUserRound, path: token ? '/dashboard' : '/login' },
@@ -25,7 +25,7 @@ export function BottomNav() {
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive =
-            tab.name === 'Categories' ? location.pathname.startsWith('/category') :
+            tab.name === 'Shop by Category' ? location.pathname.startsWith('/category') :
             tab.name === 'Cart' ? location.pathname === '/cart' :
             tab.name === 'Orders' ? location.pathname === '/my-orders' :
             tab.name === 'Account' ? ['/dashboard', '/profile', '/my-addresses', '/account-settings', '/login'].includes(location.pathname) :

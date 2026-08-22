@@ -80,7 +80,7 @@ function CategoriesDropdown() {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}>
       <button className="flex items-center gap-1 text-[14px] lg:text-[15px] font-bold text-gray-700 hover:text-brand-orange transition-colors">
-        Categories <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
+        Shop by Category <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
         <div className="absolute top-full left-0 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-[100]">
@@ -298,7 +298,7 @@ export function Header({ variant = 'default', title, showShare = false }) {
                 <motion.div variants={itemVariants}>
                   <button onClick={() => setMobileCatsOpen(o => !o)}
                     className="w-full flex items-center justify-between text-gray-900 font-bold text-base py-3 px-4 rounded-xl hover:bg-gray-50 hover:text-brand-orange transition-all">
-                    Categories
+                    Shop by Category
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileCatsOpen ? 'rotate-180 text-brand-orange' : ''}`} />
                   </button>
                   <AnimatePresence initial={false}>
