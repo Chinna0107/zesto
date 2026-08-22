@@ -6,6 +6,7 @@ import { AdBanner } from '../components/AdBanner';
 import { useStoreData } from '../store/useStoreData';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ShieldCheck, Truck, Award, Headset, Clock } from 'lucide-react';
 
 import imgHeroBanner from '../assets/hero_banner.png';
 import imgHeroBannerPremium from '../assets/hero_banner_premium.jpg';
@@ -46,19 +47,19 @@ export function HomePage() {
         {banners.length > 0 ? (
           <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 mt-6">
             {banners.map((banner) => (
-              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 shadow-md h-[260px] sm:h-[320px] md:h-[480px] group">
+              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[260px] sm:h-[320px] md:h-[480px] group">
                 {/* Background image with subtle zoom on hover */}
                 <img src={banner.image_url} alt={banner.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out" />
                 
-                {/* Light Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent flex flex-col justify-center px-6 sm:px-10 md:px-20">
+                {/* Text Container */}
+                <div className="absolute left-4 sm:left-10 md:left-20 top-1/2 -translate-y-1/2 max-w-2xl">
                   
-                  <h2 className="relative z-10 text-gray-900 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-3 md:mb-6 max-w-2xl leading-[1.1] tracking-tight">
+                  <h2 className="text-gray-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 md:mb-6 leading-[1.1] tracking-tight">
                     {banner.title}
                   </h2>
                   {(banner.link_url || banner.link_url === '') && (
-                    <Link to={banner.link_url || "/category/all"} className="relative z-10 bg-brand-blue text-white text-sm md:text-base lg:text-lg font-bold px-6 md:px-10 py-3 rounded-xl shadow-md w-fit hover:scale-105 hover:bg-blue-700 transition-all flex items-center gap-3 group/btn">
-                      Shop Now <span className="text-xl group-hover/btn:translate-x-1 transition-transform">→</span>
+                    <Link to={banner.link_url || "/category/all"} className="bg-brand-blue text-white text-sm md:text-base lg:text-lg font-bold px-6 md:px-10 py-3 rounded-xl w-fit hover:scale-105 hover:bg-blue-700 transition-all flex items-center gap-3 group/btn">
+                       Shop Now <span className="text-xl group-hover/btn:translate-x-1 transition-transform">→</span>
                     </Link>
                   )}
                 </div>
@@ -66,20 +67,21 @@ export function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="relative w-full rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 shadow-md h-[260px] sm:h-[320px] md:h-[480px] mt-6 group">
+          <div className="relative w-full rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[260px] sm:h-[320px] md:h-[480px] mt-6 group">
             {/* Fallback Image */}
-            <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-cover opacity-20 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700 ease-out" />
+            <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out" />
             
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent flex flex-col justify-center px-6 sm:px-10 md:px-20">
+            {/* Text Container */}
+            <div className="absolute left-4 sm:left-10 md:left-20 top-1/2 -translate-y-1/2 max-w-xl">
               
-              <h2 className="relative z-10 text-brand-blue text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-3 md:mb-5 max-w-2xl leading-[1.1] tracking-tight">
+              <h2 className="text-brand-blue text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 md:mb-5 leading-[1.1] tracking-tight">
                 SHOP SMART.<br/><span className="text-brand-orange">LIVE BETTER.</span>
               </h2>
-              <p className="relative z-10 text-gray-700 mb-6 text-sm sm:text-base md:text-lg max-w-lg hidden sm:block leading-relaxed">
+              <p className="text-gray-800 font-medium mb-6 text-sm sm:text-base md:text-lg hidden sm:block leading-relaxed">
                 Top quality products. Best prices. Fast delivery.
               </p>
               
-              <Link to="/category/all" className="relative z-10 group/btn bg-brand-blue text-white text-sm md:text-base lg:text-lg font-bold px-6 md:px-10 py-3 rounded-xl shadow-md w-fit hover:bg-blue-700 hover:scale-105 transition-all flex items-center gap-4">
+              <Link to="/category/all" className="group/btn bg-brand-blue text-white text-sm md:text-base lg:text-lg font-bold px-6 md:px-10 py-3 rounded-xl w-fit hover:bg-blue-700 hover:scale-105 transition-all flex items-center gap-4">
                 <span>Shop Now</span> 
                 <span className="text-white leading-none font-bold text-xl group-hover/btn:translate-x-1 transition-transform">→</span>
               </Link>
@@ -88,22 +90,24 @@ export function HomePage() {
         )}
       </div>
 
-      {/* 2. Categories Ribbon */}
-      <div className="animate-section z-30 mb-8 px-2 overflow-x-auto hide-scrollbar mt-4">
-        <div className="flex gap-4 md:gap-8 justify-start md:justify-center min-w-max mx-auto px-4">
-          {categories.map(cat => (
-            <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-3 group w-20 md:w-24">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center p-3 border border-gray-100 shadow-sm transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1 group-hover:border-brand-blue group-hover:shadow-md">
-                {cat.image_url ? (
-                  <img src={cat.image_url} alt={cat.name} className="w-full h-full object-contain relative z-10 mix-blend-multiply" />
-                ) : (
-                  <img src={imgHeroBanner} alt="Cat" className="w-full h-full object-cover opacity-20 relative z-10" />
-                )}
-                <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/5 transition-colors duration-300"></div>
-              </div>
-              <span className="text-[12px] font-medium text-gray-700 text-center group-hover:text-brand-blue transition-colors leading-tight line-clamp-2">{cat.name}</span>
-            </Link>
-          ))}
+      {/* 2. Categories Grid */}
+      <div className="animate-section z-30 mb-8 mt-4 max-w-[1280px] mx-auto px-4 md:px-6 w-full">
+        <div className="bg-white rounded-3xl md:rounded-[2rem] shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-gray-100 p-4 md:p-8">
+          <div className="grid grid-cols-5 gap-y-6 md:gap-y-8 gap-x-2 md:gap-x-4">
+            {categories.map(cat => (
+              <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-3 group w-full">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 shadow-sm transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1 group-hover:border-brand-blue group-hover:shadow-md">
+                  {cat.image_url ? (
+                    <img src={cat.image_url} alt={cat.name} className="w-full h-full object-cover relative z-10" />
+                  ) : (
+                    <img src={imgHeroBanner} alt="Cat" className="w-full h-full object-cover opacity-20 relative z-10" />
+                  )}
+                  <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/10 transition-colors duration-300 z-20 pointer-events-none"></div>
+                </div>
+                <span className="text-[11px] md:text-[12px] font-medium text-gray-700 text-center group-hover:text-brand-blue transition-colors leading-tight line-clamp-2 max-w-[80px] md:max-w-[100px]">{cat.name}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -112,25 +116,85 @@ export function HomePage() {
         {/* Unified Transparent Block */}
         <div className="animate-section mb-12 flex flex-col gap-8 md:gap-10">
           
-          {/* Flash Sale Banner Style - Single Row */}
+          {/* Deals of the Day Section */}
           {products.filter(p => p.is_offer).length > 0 && (
-            <div className="relative bg-white border border-gray-200 px-4 py-4 md:px-8 md:py-5 rounded-2xl shadow-sm flex flex-row items-center justify-between gap-3 w-full overflow-hidden">
-               <div className="flex items-center gap-3 shrink-0 relative z-10">
-                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
-                    <span className="text-xl md:text-2xl text-brand-orange">⚡</span>
-                 </div>
-                 <div className="flex flex-col">
-                   <h3 className="text-base md:text-xl font-extrabold text-gray-900 tracking-wide">Deals of the Day</h3>
-                 </div>
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden pt-4 md:pt-6 pb-2 md:pb-4 px-4 md:px-6">
+               <div className="flex justify-between items-center pb-3 md:pb-4 border-b border-gray-100 mb-4 md:mb-6">
+                  <div className="flex items-center gap-2 md:gap-4">
+                     <h3 className="text-[13px] md:text-lg font-extrabold text-gray-900 tracking-wider">DEALS OF THE DAY</h3>
+                     <div className="flex items-center gap-1 bg-red-50 text-red-500 text-[9px] md:text-xs font-semibold px-2 py-0.5 md:px-2 md:py-1 rounded-md border border-red-100">
+                        <Clock className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        <span>12h 44m 00s</span>
+                     </div>
+                  </div>
+                  <Link to="/collection/top-picks" className="text-gray-900 font-bold text-[11px] md:text-sm hover:text-brand-blue flex items-center gap-1 transition-colors">
+                    SEE ALL <span className="text-base md:text-lg leading-none">›</span>
+                  </Link>
                </div>
                
-               <div className="flex items-center ml-auto shrink-0 relative z-10">
-                 <Link to="/collection/top-picks" className="text-brand-blue font-bold text-sm md:text-base flex items-center gap-1 hover:gap-2 transition-all">
-                   View All <span>→</span>
-                 </Link>
+               <div className="flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar pb-4 snap-x">
+                 {products.filter(p => p.is_offer).map(product => (
+                   <div key={product.id} className="w-[140px] md:w-[220px] shrink-0 snap-start hover:-translate-y-1 transition-transform duration-300 h-full">
+                     <ProductCard product={product} />
+                   </div>
+                 ))}
                </div>
             </div>
           )}
+
+          {/* Features Block - Moved down and enhanced for desktop */}
+          <div className="bg-white px-4 py-6 md:px-10 md:py-10 rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100/80 transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+             <div className="flex justify-between items-center overflow-x-auto hide-scrollbar gap-6 md:gap-10 snap-x">
+                
+                {/* Feature 1 */}
+                <div className="flex items-center gap-3 shrink-0 px-2 snap-start group cursor-pointer w-[140px] md:w-auto">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-50/50 flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-300">
+                     <ShieldCheck className="w-6 h-6 md:w-8 md:h-8 text-brand-blue group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+                   </div>
+                   <div className="flex flex-col">
+                     <h4 className="text-gray-900 font-extrabold text-[12px] md:text-base leading-tight group-hover:text-brand-blue transition-colors">Secure<br className="md:hidden"/> <span className="hidden md:inline"></span>Payments</h4>
+                     <p className="text-gray-500 text-[10px] md:text-sm font-medium mt-0.5">100% safe</p>
+                   </div>
+                </div>
+                <div className="w-[1px] h-10 md:h-16 bg-gray-100 shrink-0 hidden md:block"></div>
+                
+                {/* Feature 2 */}
+                <div className="flex items-center gap-3 shrink-0 px-2 snap-start group cursor-pointer w-[140px] md:w-auto">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-orange-50/50 flex items-center justify-center group-hover:bg-orange-100 transition-colors duration-300">
+                     <Truck className="w-6 h-6 md:w-8 md:h-8 text-brand-orange group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+                   </div>
+                   <div className="flex flex-col">
+                     <h4 className="text-gray-900 font-extrabold text-[12px] md:text-base leading-tight group-hover:text-brand-orange transition-colors">Fast<br className="md:hidden"/> <span className="hidden md:inline"></span>Delivery</h4>
+                     <p className="text-gray-500 text-[10px] md:text-sm font-medium mt-0.5">On-time</p>
+                   </div>
+                </div>
+                <div className="w-[1px] h-10 md:h-16 bg-gray-100 shrink-0 hidden md:block"></div>
+
+                {/* Feature 3 */}
+                <div className="flex items-center gap-3 shrink-0 px-2 snap-start group cursor-pointer w-[140px] md:w-auto">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-50/50 flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-300">
+                     <Award className="w-6 h-6 md:w-8 md:h-8 text-brand-blue group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+                   </div>
+                   <div className="flex flex-col">
+                     <h4 className="text-gray-900 font-extrabold text-[12px] md:text-base leading-tight group-hover:text-brand-blue transition-colors">Best<br className="md:hidden"/> <span className="hidden md:inline"></span>Quality</h4>
+                     <p className="text-gray-500 text-[10px] md:text-sm font-medium mt-0.5">Top products</p>
+                   </div>
+                </div>
+                <div className="w-[1px] h-10 md:h-16 bg-gray-100 shrink-0 hidden md:block"></div>
+
+                {/* Feature 4 */}
+                <div className="flex items-center gap-3 shrink-0 px-2 snap-start group cursor-pointer w-[140px] md:w-auto">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-orange-50/50 flex items-center justify-center group-hover:bg-orange-100 transition-colors duration-300">
+                     <Headset className="w-6 h-6 md:w-8 md:h-8 text-brand-orange group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+                   </div>
+                   <div className="flex flex-col">
+                     <h4 className="text-gray-900 font-extrabold text-[12px] md:text-base leading-tight group-hover:text-brand-orange transition-colors">24/7<br className="md:hidden"/> <span className="hidden md:inline"></span>Support</h4>
+                     <p className="text-gray-500 text-[10px] md:text-sm font-medium mt-0.5">We're here</p>
+                   </div>
+                </div>
+                
+             </div>
+          </div>
 
           {/* Best Sellers */}
           {products.filter(p => p.is_bestseller).length > 0 && (
@@ -196,39 +260,6 @@ export function HomePage() {
             );
           })}
           
-          {/* Bottom Features Block (Free Delivery, etc) */}
-          <div className="bg-white p-6 md:p-8 rounded-3xl mt-8 mb-4 shadow-sm border border-gray-100">
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 divide-x-0 md:divide-x divide-gray-100">
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                   <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-2xl border border-blue-100">✈️</div>
-                   <div>
-                     <h4 className="text-gray-900 font-semibold">Free Delivery</h4>
-                     <p className="text-gray-500 text-xs md:text-sm">On orders over $50</p>
-                   </div>
-                </div>
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                   <div className="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue text-2xl border border-brand-blue/20">🔄</div>
-                   <div>
-                     <h4 className="text-gray-900 font-semibold">Easy Returns</h4>
-                     <p className="text-gray-500 text-xs md:text-sm">30 days return policy</p>
-                   </div>
-                </div>
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                   <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-2xl border border-green-100">🔒</div>
-                   <div>
-                     <h4 className="text-gray-900 font-semibold">Secure Payments</h4>
-                     <p className="text-gray-500 text-xs md:text-sm">100% secure checkout</p>
-                   </div>
-                </div>
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 px-4 text-center md:text-left">
-                   <div className="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-500 text-2xl border border-yellow-100">🏆</div>
-                   <div>
-                     <h4 className="text-gray-900 font-semibold">Best Prices</h4>
-                     <p className="text-gray-500 text-xs md:text-sm">Guaranteed deals</p>
-                   </div>
-                </div>
-             </div>
-          </div>
 
         </div>
       </div>
