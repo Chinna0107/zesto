@@ -13,7 +13,7 @@ export function BottomNav() {
 
   const tabs = [
     { name: 'Home', icon: Home, path: '/' },
-    { name: 'Shop by Category', icon: LayoutGrid, path: '/category/all' },
+    { name: 'Shop', icon: LayoutGrid, path: '/category/all' },
     { name: 'Cart', icon: ShoppingCart, path: '/cart' },
     { name: 'Orders', icon: Package, path: '/my-orders' },
     { name: 'Account', icon: CircleUserRound, path: token ? '/dashboard' : '/login' },
