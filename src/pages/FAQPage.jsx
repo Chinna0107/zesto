@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from '../components/Header';
-import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { HelpCircle, ChevronDown, MessageCircle } from 'lucide-react';
 import { cn } from '../utils/cn';
 
 const faqs = [
@@ -30,24 +31,38 @@ export function FAQPage() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <div className="bg-brand-green min-h-screen pb-24 md:pb-16 font-sans">
-      <Header title="FAQs" />
+    <div className="bg-zesto-gradient min-h-screen pb-24 md:pb-16 font-sans relative">
+      <Header title="FAQs" variant="home" />
       
       {/* Top Banner */}
-      <div className="bg-brand-green text-white py-10 md:py-14 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-4">Frequently Asked Questions</h1>
-          <p className="text-sm md:text-base text-green-100 max-w-2xl mx-auto">
+      <div className="relative bg-white/5 backdrop-blur-md border-x-0 border-t-0 border-b border-brand-orange/20 py-16 md:py-20 px-4 overflow-hidden mt-2">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-orange via-transparent to-transparent"></div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto relative z-10 text-center"
+        >
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-white drop-shadow-md">Frequently Asked Questions</h1>
+          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto drop-shadow-sm">
             Find answers to the most common questions about shopping with Zesto.
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
-        <div className="bg-white rounded-sm shadow-sm border border-gray-100 p-6 md:p-10">
-          <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
-            <HelpCircle className="w-6 h-6 text-[#fe6603]" />
-            <h2 className="text-xl font-bold text-gray-900">Common Queries</h2>
+      <div className="max-w-4xl mx-auto px-4 py-12 relative z-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-3xl border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.08)] p-8 md:p-12 space-y-10"
+        >
+          
+          <div className="flex items-center gap-3 mb-8 border-b border-gray-100 pb-6">
+            <div className="bg-orange-50 p-2.5 rounded-xl">
+              <HelpCircle className="w-6 h-6 text-brand-orange" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-gray-900">Common Queries</h2>
           </div>
 
           <div className="space-y-4">
@@ -55,34 +70,42 @@ export function FAQPage() {
               <div 
                 key={index} 
                 className={cn(
-                  "border rounded-lg overflow-hidden transition-all duration-200",
-                  openIndex === index ? "border-[#fe6603] shadow-sm" : "border-gray-200 hover:border-gray-300"
+                  "border rounded-2xl overflow-hidden transition-all duration-300",
+                  openIndex === index ? "border-brand-orange shadow-md bg-white" : "border-gray-100 hover:border-brand-orange/50 bg-gray-50/50 hover:bg-white"
                 )}
               >
                 <button 
                   onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                  className="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors text-left"
+                  className="w-full flex items-center justify-between p-5 text-left transition-colors"
                 >
-                  <span className="font-bold text-gray-900 text-sm pr-4">{faq.question}</span>
-                  {openIndex === index ? (
-                    <ChevronUp className="w-5 h-5 text-[#fe6603] shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
-                  )}
+                  <div className="flex items-center gap-3">
+                    <MessageCircle className={cn("w-5 h-5 transition-colors", openIndex === index ? "text-brand-orange" : "text-gray-400")} />
+                    <span className="font-bold text-gray-900 text-[15px] pr-4">{faq.question}</span>
+                  </div>
+                  <ChevronDown className={cn("w-5 h-5 shrink-0 transition-transform duration-300", openIndex === index ? "text-brand-orange rotate-180" : "text-gray-400")} />
                 </button>
                 
-                {openIndex === index && (
-                  <div className="p-4 pt-0 bg-white">
-                    <p className="text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="px-5 pb-5 pt-1">
+                        <p className="text-[15px] text-gray-600 leading-relaxed font-medium">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </div>
   );

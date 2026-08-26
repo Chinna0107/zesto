@@ -1,72 +1,92 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Header } from '../components/Header';
 import { RefreshCcw, ShieldAlert, CreditCard, HelpCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export function ReturnsPolicyPage() {
   return (
-    <div className="bg-brand-green min-h-screen pb-24 md:pb-16 font-sans">
-      <Header title="Returns & Exchanges" />
+    <div className="bg-zesto-gradient min-h-screen pb-24 md:pb-16 font-sans relative">
+      <Header title="Returns & Refunds" variant="home" />
       
       {/* Top Banner */}
-      <div className="bg-brand-green text-white py-10 md:py-14 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-4">Returns & Exchanges</h1>
-          <p className="text-sm md:text-base text-green-100 max-w-2xl mx-auto">
-            Not completely satisfied? We're here to help make it right with our simple return process.
+      <div className="relative bg-white/5 backdrop-blur-md border-x-0 border-t-0 border-b border-brand-orange/20 py-16 md:py-20 px-4 overflow-hidden mt-2">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-orange via-transparent to-transparent"></div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto relative z-10 text-center"
+        >
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-white drop-shadow-md">Returns & Refunds</h1>
+          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto drop-shadow-sm">
+            We want you to be completely satisfied with your purchase. Here is how we handle returns.
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
-        <div className="bg-white rounded-sm shadow-sm border border-gray-100 p-6 md:p-10 space-y-8">
+      <div className="max-w-4xl mx-auto px-4 py-12 relative z-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-3xl border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.08)] p-8 md:p-12 space-y-10"
+        >
           
           <section>
             <div className="flex items-center gap-3 mb-4">
-              <RefreshCcw className="w-6 h-6 text-[#fe6603]" />
-              <h2 className="text-xl font-bold text-gray-900">Return Window</h2>
+              <div className="bg-orange-50 p-2.5 rounded-xl">
+                <RefreshCcw className="w-6 h-6 text-brand-orange" />
+              </div>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Return Window</h2>
             </div>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              We offer a 7-day return policy for most items. If 7 days have gone by since your purchase was delivered, unfortunately, we cannot offer you a refund or exchange. To be eligible for a return, your item must be unused, unsealed, and in the exact same condition that you received it. It must also be in the original packaging.
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+              We accept returns up to 14 days after delivery. If the item is unused and in its original condition, we will refund the full order amount minus the shipping costs for the return.
+            </p>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              If the item is defective or damaged during transit, please contact us immediately upon receipt so we can evaluate the issue and make it right.
             </p>
           </section>
 
           <section>
             <div className="flex items-center gap-3 mb-4">
-              <ShieldAlert className="w-6 h-6 text-[#fe6603]" />
-              <h2 className="text-xl font-bold text-gray-900">Non-Returnable Items</h2>
+              <div className="bg-orange-50 p-2.5 rounded-xl">
+                <ShieldAlert className="w-6 h-6 text-brand-orange" />
+              </div>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Non-returnable Items</h2>
             </div>
-            <p className="text-gray-600 text-sm leading-relaxed mb-4">
-              Several types of goods are exempt from being returned due to hygiene, safety, and brand policies:
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+              Certain types of items cannot be returned, like perishable goods (such as food, flowers, or plants), custom products (such as special orders or personalized items), and personal care goods (such as beauty products).
             </p>
-            <ul className="list-disc pl-5 space-y-2 text-sm text-gray-600">
-              <li>Perishable goods, intimate apparel, sanitary goods, or hazardous materials.</li>
-              <li>Certain electronics if the seal is broken or if they have been activated/installed.</li>
-              <li>Items purchased during clearance sales or special festive offers (unless damaged).</li>
-            </ul>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              We also do not accept returns for hazardous materials, flammable liquids, or gases. Please get in touch if you have questions or concerns about your specific item.
+            </p>
           </section>
 
           <section>
             <div className="flex items-center gap-3 mb-4">
-              <CreditCard className="w-6 h-6 text-[#fe6603]" />
-              <h2 className="text-xl font-bold text-gray-900">Refunds</h2>
+              <div className="bg-orange-50 p-2.5 rounded-xl">
+                <CreditCard className="w-6 h-6 text-brand-orange" />
+              </div>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Refunds Process</h2>
             </div>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.
-              If approved, your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within 5-7 business days.
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              We will notify you once we’ve received and inspected your return, and let you know if the refund was approved or not. If approved, you’ll be automatically refunded on your original payment method within 10 business days. Please remember it can take some time for your bank or credit card company to process and post the refund too.
             </p>
           </section>
 
-          <div className="mt-10 p-6 bg-orange-50 border border-orange-100 rounded-lg text-center">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Ready to initiate a return?</h3>
-            <p className="text-sm text-gray-600 mb-4">Reach out to our support team and we'll guide you through the process.</p>
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#fe6603] text-white font-bold py-2.5 px-6 rounded hover:bg-orange-600 transition-colors">
-              <HelpCircle className="w-4 h-4" />
-              Contact Support
-            </Link>
-          </div>
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-orange-50 p-2.5 rounded-xl">
+                <HelpCircle className="w-6 h-6 text-brand-orange" />
+              </div>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Exchanges</h2>
+            </div>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              The fastest way to ensure you get what you want is to return the item you have, and once the return is accepted, make a separate purchase for the new item. We do not offer direct exchanges.
+            </p>
+          </section>
 
-        </div>
+        </motion.div>
       </div>
     </div>
   );

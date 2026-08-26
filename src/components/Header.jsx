@@ -38,10 +38,10 @@ function AvatarDropdown({ user, onLogout }) {
   return (
     <div ref={ref} className="relative">
       <button onClick={() => setOpen(!open)} className="flex items-center gap-1.5 group">
-        <div className="w-8 h-8 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center shadow-sm ring-2 ring-orange-200 group-hover:ring-orange-400 transition-all">
+        <div className="w-8 h-8 rounded-full bg-white text-red-500 text-xs font-bold flex items-center justify-center shadow-sm ring-2 ring-white/50 group-hover:ring-white transition-all">
           {initials}
         </div>
-        <ChevronDown className={`w-3 h-3 text-gray-500 transition-transform hidden md:block ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-3 h-3 text-white/80 transition-transform hidden md:block group-hover:text-white ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
         <div className="absolute right-0 top-11 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-[100]">
@@ -79,7 +79,7 @@ function CategoriesDropdown() {
     <div ref={ref} className="relative py-4 -my-4"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}>
-      <button className="flex items-center gap-1 text-[14px] lg:text-[15px] font-bold text-gray-700 hover:text-brand-orange transition-colors">
+      <button className="flex items-center gap-1 text-[14px] lg:text-[15px] font-bold text-white/90 hover:text-white transition-colors">
         Shop by Category <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
@@ -111,14 +111,14 @@ function OffersDropdown() {
     fetch(`${BACKEND_URL}/offers/active`)
       .then(r => r.json())
       .then(d => setOffers(d.offers || []))
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   return (
     <div ref={ref} className="relative py-4 -my-4"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}>
-      <button className="flex items-center gap-1 text-[14px] lg:text-[15px] font-bold text-gray-700 hover:text-brand-orange transition-colors">
+      <button className="flex items-center gap-1 text-[14px] lg:text-[15px] font-bold text-white/90 hover:text-white transition-colors">
         Offers <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
@@ -150,76 +150,76 @@ function DesktopFullHeader({ cartCount, wishlistCount, token, user, handleLogout
   return (
     <>
       <div className="h-[90px] lg:h-[110px] hidden md:block" />
-      <header className="fixed top-0 left-0 z-50 w-full bg-white border-b border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-6 md:px-10 lg:px-12 py-2 hidden md:block transition-all duration-300">
+      <header className="fixed top-0 left-0 z-50 w-full bg-zesto-gradient border-b border-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.1)] px-6 md:px-10 lg:px-12 py-2 hidden md:block transition-all duration-300">
         <div className="w-full max-w-[1600px] mx-auto flex items-center justify-between gap-4">
 
           {/* Navigation Links */}
           <nav className="flex-1 hidden lg:flex items-center justify-start gap-8">
-            <Link to="/" className="text-[14px] lg:text-[15px] font-bold text-gray-600 hover:text-brand-orange transition-all relative group">
+            <Link to="/" className="text-[14px] lg:text-[15px] font-bold text-white/90 hover:text-white transition-all relative group">
               Home
-              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
             <CategoriesDropdown />
             <OffersDropdown />
-            <Link to="/about" className="text-[14px] lg:text-[15px] font-bold text-gray-600 hover:text-brand-orange transition-all relative group">
+            <Link to="/about" className="text-[14px] lg:text-[15px] font-bold text-white/90 hover:text-white transition-all relative group">
               About
-              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
-            <Link to="/contact" className="text-[14px] lg:text-[15px] font-bold text-gray-600 hover:text-brand-orange transition-all relative group">
+            <Link to="/contact" className="text-[14px] lg:text-[15px] font-bold text-white/90 hover:text-white transition-all relative group">
               Contact
-              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
-            <Link to="/my-orders" className="text-[14px] lg:text-[15px] font-bold text-gray-600 hover:text-brand-orange transition-all relative group">
+            <Link to="/my-orders" className="text-[14px] lg:text-[15px] font-bold text-white/90 hover:text-white transition-all relative group">
               Orders
-              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-brand-orange group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+              <span className="absolute -bottom-1.5 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
             </Link>
           </nav>
 
           {/* Centered Logo */}
           <Link to="/" className="shrink-0 flex items-center justify-center mx-4 group lg:mx-0 relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-brand-orange/20 rounded-full blur-[30px] group-hover:bg-brand-orange/30 transition-colors pointer-events-none"></div>
-            <img src={logo} alt="Logo" className="relative z-10 h-16 md:h-20 lg:h-24 w-auto max-w-[200px] lg:max-w-[280px] object-contain transition-all duration-500 group-hover:scale-105" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[70px] bg-white blur-[25px] rounded-[100%] pointer-events-none z-0"></div>
+            <img src={logo} alt="Logo" className="relative z-10 h-16 md:h-20 lg:h-24 w-auto max-w-[200px] lg:max-w-[280px] object-contain drop-shadow-[0_0_15px_rgba(255,255,255,1)] transition-all duration-500 group-hover:scale-105" />
           </Link>
 
           {/* Right Action Icons & Search */}
           <div className="flex-1 flex items-center justify-end gap-5 lg:gap-8">
             <div className="relative hidden xl:block w-[260px] group">
-              <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-brand-orange transition-colors z-10" />
+              <Search className="w-4 h-4 text-white/70 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-white transition-colors z-10" />
               <input type="text" placeholder="Search products..."
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && e.target.value.trim())
                     window.location.href = `/category/all?search=${encodeURIComponent(e.target.value.trim())}`;
                 }}
-                className="w-full bg-gray-100 hover:bg-gray-200 border border-transparent rounded-full py-2.5 pl-11 pr-4 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:bg-white focus:border-brand-orange/50 transition-all"
+                className="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-full py-2.5 pl-11 pr-4 text-sm text-white placeholder-white/80 focus:outline-none focus:bg-white/30 focus:border-white transition-all"
               />
             </div>
-            
+
             <div className="flex items-center gap-4 lg:gap-5">
-              <Link to="/wishlist" className="relative p-2.5 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-full border border-gray-200 hover:border-brand-orange/40 hover:-translate-y-1 transition-all group">
-                <Heart className="w-5 h-5 text-gray-700 group-hover:text-brand-orange transition-colors" strokeWidth={1.5} />
+              <Link to="/wishlist" className="relative p-2.5 cursor-pointer bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full border border-white/30 hover:border-white hover:-translate-y-1 transition-all group">
+                <Heart className="w-5 h-5 text-white transition-colors" strokeWidth={1.5} />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-brand-orange text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border border-white">
+                  <span className="absolute -top-1.5 -right-1.5 bg-white text-red-500 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border border-white">
                     {wishlistCount}
                   </span>
                 )}
               </Link>
-              
-              <Link to="/cart" className="relative p-2.5 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-full border border-gray-200 hover:border-brand-orange/40 hover:-translate-y-1 transition-all group">
-                <ShoppingCart className="w-5 h-5 text-gray-700 group-hover:text-brand-orange transition-colors" strokeWidth={1.5} />
+
+              <Link to="/cart" className="relative p-2.5 cursor-pointer bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full border border-white/30 hover:border-white hover:-translate-y-1 transition-all group">
+                <ShoppingCart className="w-5 h-5 text-white transition-colors" strokeWidth={1.5} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-brand-orange text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border border-white animate-pulse">
+                  <span className="absolute -top-1.5 -right-1.5 bg-white text-red-500 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border border-white animate-pulse">
                     {cartCount}
                   </span>
                 )}
               </Link>
-              
+
               {token ? (
                 <div className="ml-2">
                   <AvatarDropdown user={user} onLogout={handleLogout} />
                 </div>
               ) : (
-                <Link to="/login" className="flex items-center gap-2 text-sm font-bold text-white bg-brand-blue hover:bg-blue-700 px-5 lg:px-6 py-2.5 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all ml-2 group">
-                  <LogIn className="w-4 h-4 group-hover:scale-110 transition-transform" /> 
+                <Link to="/login" className="flex items-center gap-2 text-sm font-bold text-red-500 bg-white hover:bg-red-50 px-5 lg:px-6 py-2.5 rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all ml-2 group">
+                  <LogIn className="w-4 h-4 group-hover:scale-110 transition-transform" />
                   <span className="tracking-wide">Login</span>
                 </Link>
               )}
@@ -244,7 +244,7 @@ export function Header({ variant = 'default', title, showShare = false }) {
   const handleLogout = () => { logout(); navigate('/'); };
 
   const primaryAddress = addresses && addresses.length > 0 ? addresses[0] : null;
-  const locationText = primaryAddress 
+  const locationText = primaryAddress
     ? [primaryAddress.line1, primaryAddress.city, primaryAddress.state].filter(Boolean).join(', ')
     : 'Select Location';
 
@@ -382,7 +382,7 @@ export function Header({ variant = 'default', title, showShare = false }) {
                   <Menu className="w-6 h-6" strokeWidth={2} />
                 </button>
               </div>
-              
+
               {/* Centered Logo for Mobile */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                 {/* Glow Effect */}
@@ -411,7 +411,7 @@ export function Header({ variant = 'default', title, showShare = false }) {
                 </Link>
               </div>
             </div>
-            
+
             {/* Middle Row: Search and Filter */}
             <div className="relative mt-2 flex items-center gap-3">
               <div className="relative flex-1">
@@ -428,7 +428,7 @@ export function Header({ variant = 'default', title, showShare = false }) {
                 <Filter className="w-5 h-5" strokeWidth={1.5} />
               </button>
             </div>
-            
+
             {/* Bottom Row: Location and Coins */}
             <div className="mt-4 flex items-center justify-between gap-3">
               <button onClick={() => navigate(token ? '/my-addresses' : '/login')} className="flex-1 flex items-center justify-between bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 border border-white/50 text-gray-900 shadow-sm overflow-hidden hover:bg-white hover:scale-[1.02] transition-all cursor-pointer">
@@ -438,7 +438,7 @@ export function Header({ variant = 'default', title, showShare = false }) {
                 </div>
                 <ChevronDown className="w-4 h-4 shrink-0 ml-1 text-gray-500" />
               </button>
-              
+
               <div className="shrink-0 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm rounded-full px-3 py-2 border border-white/50 text-gray-900 font-extrabold shadow-sm">
                 <div className="bg-yellow-400 rounded-full w-5 h-5 flex items-center justify-center">
                   <Zap className="w-3.5 h-3.5 text-white" strokeWidth={3} fill="currentColor" />

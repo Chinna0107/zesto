@@ -59,19 +59,19 @@ export function HomePage() {
       <Header variant="home" />
       
       {/* Categories Grid */}
-      <div className="animate-section z-30 mb-6 mt-2 max-w-[1280px] mx-auto px-4 md:px-6 w-full relative">
-        <div className="bg-white rounded-3xl md:rounded-[2rem] shadow-sm border border-gray-100 p-4 md:p-8 mt-2">
-          <div className="grid grid-cols-5 gap-y-4 md:gap-y-8 gap-x-2 md:gap-x-4">
+      <div className="animate-section z-30 mb-6 mt-2 max-w-[1100px] mx-auto px-4 md:px-6 w-full relative">
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl md:rounded-[1.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-white/60 p-4 md:p-6 mt-2">
+          <div className="grid grid-cols-5 gap-y-4 md:gap-y-6 gap-x-2 md:gap-x-4">
             {categories.slice(0, 10).map(cat => (
-              <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-2 group w-full">
-                <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 shadow-sm transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1">
+              <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-2 md:gap-3 group w-full">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center ring-1 ring-gray-200 p-1 transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1 group-hover:ring-brand-orange group-hover:ring-2 group-hover:shadow-md">
                   {cat.image_url ? (
-                    <img src={cat.image_url} alt={cat.name} onError={(e) => { e.target.onerror = null; e.target.src = imgHeroBanner; }} className="w-full h-full object-cover relative z-10 p-1 rounded-full bg-white" />
+                    <img src={cat.image_url} alt={cat.name} onError={(e) => { e.target.onerror = null; e.target.src = imgHeroBanner; }} className="w-full h-full object-cover relative z-10 rounded-full bg-gray-50" />
                   ) : (
                     <img src={imgHeroBanner} alt="Cat" className="w-full h-full object-cover opacity-20 relative z-10" />
                   )}
                 </div>
-                <span className="text-[10px] md:text-[12px] font-medium text-gray-700 text-center leading-tight line-clamp-2">{cat.name}</span>
+                <span className="text-[10px] md:text-[13px] font-bold text-gray-600 group-hover:text-brand-orange text-center leading-tight line-clamp-1 transition-colors px-1">{cat.name}</span>
               </Link>
             ))}
           </div>

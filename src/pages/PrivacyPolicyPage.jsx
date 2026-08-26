@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Header } from '../components/Header';
-import { Truck, Clock, MapPin, Package } from 'lucide-react';
+import { Shield, Lock, Eye, Database } from 'lucide-react';
 
-export function ShippingPolicyPage() {
+export function PrivacyPolicyPage() {
   return (
     <div className="bg-zesto-gradient min-h-screen pb-24 md:pb-16 font-sans relative">
-      <Header title="Shipping Policy" variant="home" />
+      <Header title="Privacy Policy" variant="home" />
       
       {/* Top Banner */}
       <div className="relative bg-white/5 backdrop-blur-md border-x-0 border-t-0 border-b border-brand-orange/20 py-16 md:py-20 px-4 overflow-hidden mt-2">
@@ -17,9 +17,9 @@ export function ShippingPolicyPage() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto relative z-10 text-center"
         >
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-white drop-shadow-md">Shipping Policy</h1>
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-white drop-shadow-md">Privacy Policy</h1>
           <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto drop-shadow-sm">
-            Everything you need to know about how we deliver your orders safely and on time.
+            Your privacy is critically important to us. Learn how we collect, use, and protect your personal information.
           </p>
         </motion.div>
       </div>
@@ -35,56 +35,59 @@ export function ShippingPolicyPage() {
           <section>
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-orange-50 p-2.5 rounded-xl">
-                <Clock className="w-6 h-6 text-brand-orange" />
+                <Database className="w-6 h-6 text-brand-orange" />
               </div>
-              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Processing Time</h2>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Information We Collect</h2>
             </div>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
-              All orders are processed within 1-2 business days (excluding weekends and holidays) after receiving your order confirmation email. You will receive another notification when your order has shipped.
-            </p>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-              In the event of a high volume of orders, processing times may be slightly delayed. Please allow additional days in transit for delivery.
-            </p>
-          </section>
-
-          <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="bg-orange-50 p-2.5 rounded-xl">
-                <Truck className="w-6 h-6 text-brand-orange" />
-              </div>
-              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Shipping Rates & Estimates</h2>
-            </div>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
-              Shipping charges for your order will be calculated and displayed at checkout. We offer the following shipping options within India:
+              We collect information to provide better services to all our users. The types of personal information we collect include:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 text-sm md:text-base">
-              <li><strong>Standard Shipping:</strong> 3-5 business days (Free on orders above ₹999)</li>
-              <li><strong>Express Shipping:</strong> 1-2 business days (₹150 flat rate)</li>
-              <li><strong>Same Day Delivery:</strong> Available in select metro cities for orders placed before 12 PM (₹250 flat rate)</li>
+              <li><strong>Personal Details:</strong> Name, email address, phone number, and shipping address.</li>
+              <li><strong>Payment Information:</strong> Credit card details, UPI IDs, and billing address (processed securely by our payment partners).</li>
+              <li><strong>Usage Data:</strong> Information about how you interact with our website, device information, and IP addresses.</li>
             </ul>
           </section>
 
           <section>
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-orange-50 p-2.5 rounded-xl">
-                <MapPin className="w-6 h-6 text-brand-orange" />
+                <Eye className="w-6 h-6 text-brand-orange" />
               </div>
-              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Order Tracking</h2>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">How We Use Your Data</h2>
+            </div>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+              Your information is used to enhance your shopping experience:
+            </p>
+            <ul className="list-disc pl-5 space-y-2 text-gray-600 text-sm md:text-base">
+              <li>To process and deliver your orders accurately.</li>
+              <li>To communicate with you regarding order updates, offers, and support.</li>
+              <li>To personalize your experience and recommend relevant products.</li>
+              <li>To detect and prevent fraudulent activities.</li>
+            </ul>
+          </section>
+
+          <section>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-orange-50 p-2.5 rounded-xl">
+                <Shield className="w-6 h-6 text-brand-orange" />
+              </div>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Data Protection</h2>
             </div>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-              When your order has shipped, you will receive an email notification from us which will include a tracking number you can use to check its status. Please allow 24 hours for the tracking information to become available.
+              We implement a variety of security measures to maintain the safety of your personal information. All payment transactions are encrypted using SSL technology and are processed through a gateway provider; they are not stored or processed on our servers.
             </p>
           </section>
 
           <section>
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-orange-50 p-2.5 rounded-xl">
-                <Package className="w-6 h-6 text-brand-orange" />
+                <Lock className="w-6 h-6 text-brand-orange" />
               </div>
-              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Damaged or Lost Packages</h2>
+              <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">Your Rights</h2>
             </div>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-              Zesto is not liable for any products damaged or lost during shipping. If you received your order damaged, please contact the shipment carrier to file a claim. Please save all packaging materials and damaged goods before filing a claim.
+              You have the right to access, update, or delete your personal information at any time. If you wish to exercise these rights, please contact our support team. We will not sell, trade, or otherwise transfer your Personally Identifiable Information to outside parties.
             </p>
           </section>
 

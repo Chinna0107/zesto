@@ -246,19 +246,7 @@ export function CategoryListingPage() {
           </div>
         </div>
 
-        {/* Ad Block */}
-        {banners.length > 0 ? (
-          <AdBanner 
-            imageUrl={banners[0].image_url} 
-            altText={banners[0].title || "Category Special Ad"} 
-            link={banners[0].link_url || "/category/all"}
-          />
-        ) : (
-          <AdBanner 
-            imageUrl={imgMeditation} 
-            altText="Category Special Ad" 
-          />
-        )}
+        {/* Ad Block Removed */}
 
         {/* Filter and Sort Bar for Mobile / Top Bar for Desktop */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-gray-100 gap-4">
@@ -293,30 +281,11 @@ export function CategoryListingPage() {
           {/* Product Grid */}
           <div className="flex-1">
             <div className={layout === 'grid' ? 'grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6' : 'flex flex-col gap-4'}>
-              {filteredProducts.map((product, index) => {
-                const isAdSlot = (index + 1) % 14 === 0;
-                return (
-                  <React.Fragment key={product.id}>
-                    <ProductCard product={product} layout={layout} />
-                    {isAdSlot && (
-                      <div className="col-span-full">
-                        {banners.length > 1 ? (
-                          <AdBanner 
-                            imageUrl={banners[1 % banners.length].image_url} 
-                            altText={banners[1 % banners.length].title || "In-Feed Ad"} 
-                            link={banners[1 % banners.length].link_url || "/category/all"}
-                          />
-                        ) : (
-                          <AdBanner 
-                            imageUrl={imgAarti} 
-                            altText="In-Feed Ad" 
-                          />
-                        )}
-                      </div>
-                    )}
-                  </React.Fragment>
-                );
-              })}
+              {filteredProducts.map((product, index) => (
+                <React.Fragment key={product.id}>
+                  <ProductCard product={product} layout={layout} />
+                </React.Fragment>
+              ))}
               
               {filteredProducts.length === 0 && (
                 <div className="col-span-full py-24 text-center flex flex-col items-center bg-white rounded-3xl shadow-sm border border-gray-100">
@@ -334,25 +303,7 @@ export function CategoryListingPage() {
           </div>
         </div>
 
-        {/* Bottom Ad Block */}
-        {banners.length > 2 ? (
-          <AdBanner 
-            imageUrl={banners[2 % banners.length].image_url} 
-            altText={banners[2 % banners.length].title || "Category Bottom Ad"} 
-            link={banners[2 % banners.length].link_url || "/category/all"}
-          />
-        ) : banners.length > 0 ? (
-          <AdBanner 
-            imageUrl={banners[0].image_url} 
-            altText={banners[0].title || "Category Bottom Ad"} 
-            link={banners[0].link_url || "/category/all"}
-          />
-        ) : (
-          <AdBanner 
-            imageUrl={imgAarti} 
-            altText="Category Bottom Ad" 
-          />
-        )}
+        {/* Bottom Ad Block Removed */}
       </div>
 
       {/* Mobile Filters Drawer/Modal */}

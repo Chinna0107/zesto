@@ -25,6 +25,8 @@ import { MyAddressesPage } from './pages/MyAddressesPage';
 import { AccountSettingsPage } from './pages/AccountSettingsPage';
 import { ShippingPolicyPage } from './pages/ShippingPolicyPage';
 import { ReturnsPolicyPage } from './pages/ReturnsPolicyPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsOfServicePage } from './pages/TermsOfServicePage';
 import { FAQPage } from './pages/FAQPage';
 import { CollectionPage } from './pages/CollectionPage';
 import { SearchPage } from './pages/SearchPage';
@@ -94,6 +96,8 @@ function AnimatedAppRoutes() {
         <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
         <Route path="/shipping-policy" element={<PageTransition><ShippingPolicyPage /></PageTransition>} />
         <Route path="/returns-policy" element={<PageTransition><ReturnsPolicyPage /></PageTransition>} />
+        <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicyPage /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><TermsOfServicePage /></PageTransition>} />
         <Route path="/faqs" element={<PageTransition><FAQPage /></PageTransition>} />
         <Route path="/search" element={<PageTransition><SearchPage /></PageTransition>} />
         <Route path="/offers" element={<PageTransition><OffersPage /></PageTransition>} />
