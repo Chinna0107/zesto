@@ -37,6 +37,15 @@ export function CategoryListingPage() {
     else document.body.style.overflow = 'unset';
     return () => { document.body.style.overflow = 'unset'; };
   }, [showMobileFilters]);
+
+  // Open mobile filters if opened from header
+  useEffect(() => {
+    if (searchParams.get('filter') === 'open') {
+      setShowMobileFilters(true);
+      searchParams.delete('filter');
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
   
   let categoryName = modelQuery ? `${modelQuery} Products` : 'All Products';
   let bannerImg = imgAarti;
@@ -197,15 +206,15 @@ export function CategoryListingPage() {
       
       {/* Category Banner */}
       <div className="bg-white mx-4 lg:mx-8 rounded-3xl mt-6 relative overflow-hidden shadow-sm border border-gray-100">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-zesto-gradient pointer-events-none opacity-90" />
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between p-6 md:px-12 md:py-10 gap-6 relative z-10">
-          <div className="text-center md:text-left text-gray-900 max-w-2xl">
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">{categoryName}</h1>
-            <p className="text-gray-600 font-sans text-sm md:text-lg leading-relaxed max-w-xl">
+          <div className="text-center md:text-left text-white max-w-2xl">
+            <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight drop-shadow-md">{categoryName}</h1>
+            <p className="font-sans text-sm md:text-lg leading-relaxed max-w-xl opacity-95">
               Explore our handpicked collection of authentic, premium essentials for your divine rituals. Each item is crafted with devotion and purity.
             </p>
           </div>
-          <div className="w-28 h-28 md:w-40 md:h-40 shrink-0 rounded-full bg-white p-2 border border-brand-blue/30 shadow-sm hidden md:block group-hover:shadow-md transition-all">
+          <div className="w-28 h-28 md:w-40 md:h-40 shrink-0 rounded-full bg-white p-2 border-4 border-white/40 shadow-lg hidden md:block group-hover:shadow-xl transition-all">
             <img src={bannerImg} alt={categoryName} className="w-full h-full object-cover rounded-full" />
           </div>
         </div>
@@ -217,21 +226,21 @@ export function CategoryListingPage() {
         <div className="bg-white border-gray-100 rounded-3xl mb-8 px-4 py-6 overflow-x-auto hide-scrollbar shadow-sm">
           <div className="flex gap-6 md:gap-10 justify-start md:justify-center min-w-max mx-auto px-2">
             <Link to="/category/all" className="flex flex-col items-center gap-3 group">
-              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center border overflow-hidden transition-all ${categoryId === 'all' ? 'border-brand-blue border-2 shadow-sm bg-blue-50' : 'border-gray-200 bg-white group-hover:border-brand-blue group-hover:shadow-sm'}`}>
-                <div className={`w-full h-full flex items-center justify-center font-extrabold text-sm text-center leading-tight ${categoryId === 'all' ? 'text-brand-blue' : 'text-gray-600 group-hover:text-brand-blue'}`}>All<br/>Products</div>
+              <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center border overflow-hidden transition-all ${categoryId === 'all' ? 'border-red-500 border-2 shadow-md bg-red-50' : 'border-gray-200 bg-white group-hover:border-red-400 group-hover:shadow-sm'}`}>
+                <div className={`w-full h-full flex items-center justify-center font-extrabold text-sm text-center leading-tight ${categoryId === 'all' ? 'text-red-500' : 'text-gray-600 group-hover:text-red-500'}`}>All<br/>Products</div>
               </div>
-              <span className={`text-[13px] md:text-sm font-bold text-center transition-colors ${categoryId === 'all' ? 'text-brand-blue' : 'text-gray-600 group-hover:text-gray-900'}`}>All Products</span>
+              <span className={`text-[13px] md:text-sm font-bold text-center transition-colors ${categoryId === 'all' ? 'text-red-500' : 'text-gray-600 group-hover:text-gray-900'}`}>All Products</span>
             </Link>
             {categories.map(cat => (
               <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-3 group">
-                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center border overflow-hidden transition-all ${categoryId === cat.id.toString() ? 'border-brand-blue border-2 shadow-sm bg-blue-50' : 'border-gray-200 bg-white p-1 group-hover:border-brand-blue group-hover:shadow-sm'}`}>
+                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center border overflow-hidden transition-all ${categoryId === cat.id.toString() ? 'border-red-500 border-2 shadow-md bg-red-50' : 'border-gray-200 bg-white p-1 group-hover:border-red-400 group-hover:shadow-sm'}`}>
                   {cat.image_url ? (
                     <img src={cat.image_url} alt={cat.name} className="w-full h-full object-cover rounded-xl" />
                   ) : (
                     <img src={imgAarti} alt="Cat" className="w-full h-full object-cover opacity-50 rounded-xl mix-blend-multiply" />
                   )}
                 </div>
-                <span className={`text-[13px] md:text-sm font-bold text-center transition-colors ${categoryId === cat.id.toString() ? 'text-brand-blue' : 'text-gray-600 group-hover:text-gray-900'}`}>{cat.name}</span>
+                <span className={`text-[13px] md:text-sm font-bold text-center transition-colors ${categoryId === cat.id.toString() ? 'text-red-500' : 'text-gray-600 group-hover:text-gray-900'}`}>{cat.name}</span>
               </Link>
             ))}
           </div>
@@ -254,12 +263,12 @@ export function CategoryListingPage() {
         {/* Filter and Sort Bar for Mobile / Top Bar for Desktop */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 bg-white p-4 md:p-5 rounded-2xl shadow-sm border border-gray-100 gap-4">
           <div className="flex items-center justify-between w-full sm:w-auto gap-4">
-            <span className="text-sm font-extrabold text-brand-blue bg-blue-50 border border-brand-blue px-4 py-2 rounded-xl">{filteredProducts.length} Items</span>
+            <span className="text-sm font-extrabold text-red-500 bg-red-50 border border-red-500 px-4 py-2 rounded-xl shadow-sm">{filteredProducts.length} Items</span>
             
             {/* Mobile Filter Trigger */}
             <button 
               onClick={() => setShowMobileFilters(true)}
-              className="lg:hidden flex items-center gap-2 text-sm font-bold text-white bg-brand-blue px-5 py-2 rounded-xl shadow-md"
+              className="lg:hidden flex items-center gap-2 text-sm font-bold text-white bg-gradient-to-r from-red-500 to-orange-500 px-5 py-2 rounded-xl shadow-md hover:scale-105 transition-transform"
             >
               <Filter className="w-4 h-4" />
               Filters
@@ -268,9 +277,9 @@ export function CategoryListingPage() {
 
           <div className="hidden lg:flex items-center gap-4">
             <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">View:</span>
-            <div className="flex bg-gray-50 border border-gray-200 rounded-xl p-1.5">
-              <button onClick={() => setLayout('grid')} className={`px-5 py-2 text-sm font-bold rounded-lg transition-all ${layout === 'grid' ? 'bg-brand-blue text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}>Grid</button>
-              <button onClick={() => setLayout('list')} className={`px-5 py-2 text-sm font-bold rounded-lg transition-all ${layout === 'list' ? 'bg-brand-blue text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}>List</button>
+            <div className="flex bg-gray-50 border border-gray-200 rounded-xl p-1.5 shadow-inner">
+              <button onClick={() => setLayout('grid')} className={`px-5 py-2 text-sm font-bold rounded-lg transition-all ${layout === 'grid' ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-md' : 'text-gray-600 hover:text-gray-900'}`}>Grid</button>
+              <button onClick={() => setLayout('list')} className={`px-5 py-2 text-sm font-bold rounded-lg transition-all ${layout === 'list' ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-md' : 'text-gray-600 hover:text-gray-900'}`}>List</button>
             </div>
           </div>
         </div>

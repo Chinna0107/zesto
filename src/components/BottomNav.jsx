@@ -35,12 +35,12 @@ export function BottomNav() {
             <NavLink key={tab.name} to={tab.path}
               className={cn(
                 'flex flex-col items-center justify-end w-full h-full space-y-1 transition-all duration-300 relative z-10',
-                isActive ? 'text-brand-blue' : 'text-gray-500 hover:text-gray-900'
+                isActive ? 'text-red-500' : 'text-gray-500 hover:text-gray-900'
               )}>
               <div className="p-1 relative">
                 <Icon className={cn('w-6 h-6 transition-transform duration-300', isActive ? 'scale-110' : '')} strokeWidth={isActive ? 2 : 1.5} />
                 {tab.name === 'Cart' && cartItemCount > 0 && (
-                  <span className="absolute top-0 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-brand-orange text-[9px] font-bold text-white shadow-sm ring-1 ring-white">
+                  <span className="absolute top-0 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white shadow-sm ring-1 ring-white">
                     {cartItemCount}
                   </span>
                 )}

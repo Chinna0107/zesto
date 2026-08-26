@@ -2,13 +2,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-orange: #ff7b00; /* Brighter neon orange */
+  --color-brand-orange: #ff7b00;
   --color-brand-orange-glow: rgba(255, 123, 0, 0.2);
-  --color-brand-blue: #0047FF; /* Vibrant Blue for Primary actions */
-  --color-brand-light-bg: #f8f9fa; /* Light background */
-  --color-brand-glass-border: #e2e8f0; /* Light gray border */
-  --color-brand-text: #1f2937; /* Dark gray for text */
-  --color-brand-text-muted: #6b7280; /* Medium gray for muted text */
+  --color-brand-blue: #0047FF;
+  --color-brand-light-bg: #fff8f0; /* Warmer, premium background */
+  --color-brand-glass-border: #fca5a5; /* Soft red tint for borders */
+  --color-brand-text: #1f2937;
+  --color-brand-text-muted: #6b7280;
+  
+  /* Zesto Gradient Colors */
+  --color-zesto-top: #ef4444; /* red-500 */
+  --color-zesto-mid: #f97316; /* orange-500 */
+  --color-zesto-bot: #fef08a; /* yellow-200 / peach */
   
   /* Legacy colors */
   --color-brand-maroon: #036e26;
@@ -19,6 +24,10 @@
 }
 
 @layer utilities {
+  .bg-zesto-gradient {
+    background: linear-gradient(170deg, #f53d2d 0%, #ff7b00 40%, #ffb74d 70%, #fff6e5 100%);
+  }
+
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom, 20px);
   }

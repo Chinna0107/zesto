@@ -55,25 +55,23 @@ export function HomePage() {
   }, { scope: container, dependencies: [loading] });
 
   return (
-    <div ref={container} className="bg-transparent min-h-screen pb-12">
+    <div ref={container} className="bg-zesto-gradient min-h-screen pb-12 pt-4 md:pt-0">
       <Header variant="home" />
       
-      {/* 2. Categories Grid (Moved above Banners) */}
-      <div className="animate-section z-30 mb-8 mt-4 max-w-[1280px] mx-auto px-4 md:px-6 w-full">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 px-2">Shop by Category</h2>
-        <div className="bg-white rounded-3xl md:rounded-[2rem] shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-gray-100 p-4 md:p-8">
-          <div className="grid grid-cols-5 gap-y-6 md:gap-y-8 gap-x-2 md:gap-x-4">
-            {categories.map(cat => (
-              <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-3 group w-full">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 shadow-sm transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1 group-hover:border-brand-blue group-hover:shadow-md">
+      {/* Categories Grid */}
+      <div className="animate-section z-30 mb-6 mt-2 max-w-[1280px] mx-auto px-4 md:px-6 w-full relative">
+        <div className="bg-white rounded-3xl md:rounded-[2rem] shadow-sm border border-gray-100 p-4 md:p-8 mt-2">
+          <div className="grid grid-cols-5 gap-y-4 md:gap-y-8 gap-x-2 md:gap-x-4">
+            {categories.slice(0, 10).map(cat => (
+              <Link key={cat.id} to={`/category/${cat.id}`} className="flex flex-col items-center gap-2 group w-full">
+                <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 shadow-sm transition-all duration-300 relative overflow-hidden group-hover:-translate-y-1">
                   {cat.image_url ? (
-                    <img src={cat.image_url} alt={cat.name} className="w-full h-full object-cover relative z-10" />
+                    <img src={cat.image_url} alt={cat.name} onError={(e) => { e.target.onerror = null; e.target.src = imgHeroBanner; }} className="w-full h-full object-cover relative z-10 p-1 rounded-full bg-white" />
                   ) : (
                     <img src={imgHeroBanner} alt="Cat" className="w-full h-full object-cover opacity-20 relative z-10" />
                   )}
-                  <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/10 transition-colors duration-300 z-20 pointer-events-none"></div>
                 </div>
-                <span className="text-[11px] md:text-[12px] font-medium text-gray-700 text-center group-hover:text-brand-blue transition-colors leading-tight line-clamp-2 max-w-[80px] md:max-w-[100px]">{cat.name}</span>
+                <span className="text-[10px] md:text-[12px] font-medium text-gray-700 text-center leading-tight line-clamp-2">{cat.name}</span>
               </Link>
             ))}
           </div>
@@ -81,37 +79,59 @@ export function HomePage() {
       </div>
 
       {/* 1. Hero Banner Carousel */}
-      <div className="animate-section px-4 md:px-6 mb-8 max-w-[1280px] mx-auto mt-2 md:mt-4">
+      <div className="animate-section px-4 md:px-6 mb-8 max-w-[1280px] mx-auto mt-2">
         {banners.length > 0 ? (
-          <div ref={bannerScrollRef} className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 mt-6">
+          <div ref={bannerScrollRef} className="flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
             {banners.map((banner) => (
-              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[200px] sm:h-[260px] md:h-[380px] group">
-                {/* Background image with subtle zoom on hover */}
-                <img src={banner.image_url} alt={banner.title} className="w-full h-full object-contain object-center bg-white group-hover:scale-105 transition-all duration-700 ease-out" />
-                
-
-                
-                {/* Shop Now Button */}
-                {(banner.link_url || banner.link_url === '') && (
-                  <Link to={banner.link_url || "/category/all"} className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 bg-brand-blue text-white text-xs md:text-sm lg:text-base font-bold px-4 md:px-6 py-2 md:py-2.5 rounded-xl w-fit hover:scale-105 hover:bg-blue-700 transition-all flex items-center gap-2 group/btn shadow-lg">
-                     Shop Now <span className="text-base md:text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
+              <div key={banner.id} className="relative w-full shrink-0 snap-center rounded-2xl overflow-hidden bg-gradient-to-br from-red-500 to-orange-500 h-[180px] sm:h-[260px] md:h-[380px] group shadow-sm flex items-center p-4">
+                <div className="flex-1 text-white z-10 h-full flex flex-col justify-center max-w-[60%]">
+                  <span className="bg-yellow-300 text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-sm w-fit mb-1 uppercase">NEW ARRIVAL</span>
+                  <h3 className="text-xl md:text-3xl font-black leading-tight italic uppercase">{banner.title || "GAMING CHAIR NEW LOOK"}</h3>
+                  <p className="text-xs opacity-90 mt-1 mb-3">Comfort. Style. Performance.</p>
+                  <Link to={banner.link_url || "/category/all"} className="bg-yellow-400 text-gray-900 text-[11px] font-bold px-4 py-1.5 rounded-full w-fit hover:bg-yellow-300 transition-colors shadow-sm">
+                    BUY NOW
                   </Link>
-                )}
+                </div>
+                <div className="absolute right-[-10%] bottom-[-10%] w-[60%] h-[120%] z-0">
+                  <img src={banner.image_url} alt={banner.title} onError={(e) => { e.target.style.display = 'none'; }} className="w-full h-full object-contain" />
+                </div>
+                <Link to={banner.link_url || "/category/all"} className="absolute bottom-4 right-4 bg-white text-orange-500 text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1 shadow-sm z-10">
+                   Shop Now <span>→</span>
+                </Link>
+                
+                {/* Dots indicator mockup */}
+                <div className="absolute top-3 right-4 flex gap-1 z-10">
+                   <div className="w-1.5 h-1.5 rounded-full bg-white opacity-100"></div>
+                   <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40"></div>
+                   <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40"></div>
+                   <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40"></div>
+                </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="relative w-full rounded-3xl md:rounded-[3rem] overflow-hidden bg-white border border-gray-100 h-[200px] sm:h-[260px] md:h-[380px] mt-6 group">
-            {/* Fallback Image */}
-            <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-contain object-center bg-white group-hover:scale-105 transition-all duration-700 ease-out" />
-            
-
-            
-            {/* Shop Now Button */}
-            <Link to="/category/all" className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 group/btn bg-brand-blue text-white text-xs md:text-sm lg:text-base font-bold px-4 md:px-6 py-2 md:py-2.5 rounded-xl w-fit hover:bg-blue-700 hover:scale-105 transition-all flex items-center gap-2 shadow-lg">
-              <span>Shop Now</span> 
-              <span className="text-white leading-none font-bold text-base md:text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
+          <div className="relative w-full rounded-2xl overflow-hidden bg-gradient-to-br from-red-500 to-orange-500 h-[180px] sm:h-[260px] md:h-[380px] shadow-sm flex items-center p-4">
+            <div className="flex-1 text-white z-10 h-full flex flex-col justify-center max-w-[60%]">
+              <span className="bg-yellow-300 text-gray-900 text-[10px] font-bold px-2 py-0.5 rounded-sm w-fit mb-1 uppercase">NEW ARRIVAL</span>
+              <h3 className="text-xl md:text-3xl font-black leading-tight italic uppercase">GAMING CHAIR NEW LOOK ...</h3>
+              <p className="text-xs opacity-90 mt-1 mb-3">Comfort. Style. Performance.</p>
+              <Link to="/category/all" className="bg-yellow-400 text-gray-900 text-[11px] font-bold px-4 py-1.5 rounded-full w-fit hover:bg-yellow-300 transition-colors shadow-sm">
+                BUY NOW
+              </Link>
+            </div>
+            <div className="absolute right-[-10%] bottom-[-10%] w-[60%] h-[120%] z-0">
+              <img src={imgHeroBannerPremium} alt="Hero Banner" className="w-full h-full object-contain mix-blend-multiply" />
+            </div>
+            <Link to="/category/all" className="absolute bottom-4 right-4 bg-white text-orange-500 text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1 shadow-sm z-10">
+               Shop Now <span>→</span>
             </Link>
+            
+            <div className="absolute top-3 right-4 flex gap-1 z-10">
+               <div className="w-1.5 h-1.5 rounded-full bg-white opacity-100"></div>
+               <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40"></div>
+               <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40"></div>
+               <div className="w-1.5 h-1.5 rounded-full bg-white opacity-40"></div>
+            </div>
           </div>
         )}
       </div>

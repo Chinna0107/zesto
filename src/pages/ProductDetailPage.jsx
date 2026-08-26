@@ -156,7 +156,7 @@ export function ProductDetailPage() {
                     <div 
                       key={i} 
                       onClick={() => setMainImg(img)}
-                      className={`w-18 h-18 rounded-xl p-2 cursor-pointer transition-all ${mainImg === img ? 'border-brand-blue border-2 shadow-sm bg-blue-50' : 'border border-gray-200 hover:border-brand-blue bg-white'}`}
+                      className={`w-18 h-18 rounded-xl p-2 cursor-pointer transition-all ${mainImg === img ? 'border-red-500 border-2 shadow-sm bg-red-50' : 'border border-gray-200 hover:border-red-400 bg-white'}`}
                     >
                       <img src={img} alt={`thumb-${i}`} className="w-full h-full object-contain drop-shadow-md" />
                     </div>
@@ -172,7 +172,7 @@ export function ProductDetailPage() {
                     <button onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id); }} className="w-10 h-10 bg-white/80 rounded-full flex items-center justify-center border border-gray-200 hover:scale-110 hover:border-red-500 transition-all shadow-sm">
                       <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} strokeWidth={isWishlisted ? 0 : 1.5} />
                     </button>
-                    <button onClick={handleShare} className="w-10 h-10 bg-white/80 rounded-full flex items-center justify-center border border-gray-200 hover:scale-110 hover:border-brand-blue transition-all shadow-sm">
+                    <button onClick={handleShare} className="w-10 h-10 bg-white/80 rounded-full flex items-center justify-center border border-gray-200 hover:scale-110 hover:border-orange-500 transition-all shadow-sm">
                       <Share2 className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
                     </button>
                   </div>
@@ -186,7 +186,7 @@ export function ProductDetailPage() {
                   <div 
                     key={i} 
                     onClick={() => setMainImg(img)}
-                    className={`w-16 h-16 rounded-xl p-2 cursor-pointer flex-shrink-0 snap-start transition-all ${mainImg === img ? 'border-brand-blue border-2 shadow-sm bg-blue-50' : 'border border-gray-200 bg-white'}`}
+                    className={`w-16 h-16 rounded-xl p-2 cursor-pointer flex-shrink-0 snap-start transition-all ${mainImg === img ? 'border-red-500 border-2 shadow-sm bg-red-50' : 'border border-gray-200 bg-white'}`}
                   >
                     <img src={img} alt={`thumb-${i}`} className="w-full h-full object-contain drop-shadow-md" />
                   </div>
@@ -195,10 +195,10 @@ export function ProductDetailPage() {
 
               {/* Desktop Action Buttons */}
               <div className="hidden md:flex gap-5 mt-8">
-                <button onClick={handleAddToCart} className="flex-1 relative overflow-hidden bg-white hover:bg-gray-50 border border-brand-blue text-brand-blue font-bold py-4 rounded-2xl shadow-sm flex items-center justify-center gap-2 transition-all hover:-translate-y-1 hover:shadow-md group">
+                <button onClick={handleAddToCart} className="flex-1 relative overflow-hidden bg-white hover:bg-gray-50 border-2 border-red-500 text-red-500 font-bold py-4 rounded-2xl shadow-sm flex items-center justify-center gap-2 transition-all hover:-translate-y-1 hover:shadow-md group">
                   <ShoppingCart className="w-5 h-5" /> ADD TO CART
                 </button>
-                <button onClick={handleBuyNow} className="flex-[1.5] relative overflow-hidden bg-brand-blue border border-blue-600 text-white font-extrabold py-4 rounded-2xl shadow-md flex items-center justify-center gap-2 transition-all hover:-translate-y-1 hover:shadow-lg hover:bg-blue-700 group">
+                <button onClick={handleBuyNow} className="flex-[1.5] relative overflow-hidden bg-gradient-to-r from-red-500 to-orange-500 text-white font-extrabold py-4 rounded-2xl shadow-md flex items-center justify-center gap-2 transition-all hover:-translate-y-1 hover:shadow-lg hover:scale-[1.02] group">
                   <Zap className="w-6 h-6 fill-current drop-shadow-sm" /> BUY NOW
                 </button>
               </div>
@@ -245,8 +245,8 @@ export function ProductDetailPage() {
                       }}
                       className={`px-5 py-2.5 rounded-xl border transition-all duration-300 font-medium ${
                         selectedVariantIdx === idx 
-                          ? 'border-brand-blue text-brand-blue bg-blue-50 shadow-sm' 
-                          : 'border-gray-200 text-gray-600 hover:border-brand-blue hover:bg-gray-50'
+                          ? 'border-red-500 text-red-500 bg-red-50 shadow-sm' 
+                          : 'border-gray-200 text-gray-600 hover:border-red-400 hover:bg-gray-50'
                       }`}
                     >
                       {variant.color}
@@ -365,14 +365,14 @@ export function ProductDetailPage() {
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex gap-3 p-3 pb-safe z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
         <button 
           onClick={handleAddToCart}
-          className="flex-1 bg-gray-50 border border-brand-blue text-brand-blue font-bold py-3.5 flex items-center justify-center gap-2 hover:bg-gray-100 transition-all active:scale-95 rounded-xl shadow-sm"
+          className="flex-1 bg-white border-2 border-red-500 text-red-500 font-bold py-3.5 flex items-center justify-center gap-2 hover:bg-gray-50 transition-all active:scale-95 rounded-xl shadow-sm"
         >
           <ShoppingCart className="w-5 h-5" />
           CART
         </button>
         <button 
           onClick={handleBuyNow}
-          className="flex-[1.5] bg-brand-blue rounded-xl text-white font-extrabold py-3.5 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95 hover:bg-blue-700"
+          className="flex-[1.5] bg-gradient-to-r from-red-500 to-orange-500 rounded-xl text-white font-extrabold py-3.5 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95 hover:scale-[1.02]"
         >
            <Zap className="w-5 h-5 fill-current drop-shadow-sm" />
            BUY NOW

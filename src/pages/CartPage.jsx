@@ -104,11 +104,11 @@ export function CartPage() {
           {/* Step Indicator */}
           <div className="flex justify-between items-center mb-4 px-2 max-w-lg mx-auto">
             <div className="flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-sm font-bold shadow-md">1</div>
-              <span className="text-[11px] text-brand-blue font-bold mt-2">Cart</span>
+              <div className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-sm font-bold shadow-md">1</div>
+              <span className="text-[11px] text-red-500 font-bold mt-2">Cart</span>
             </div>
             <div className="h-[2px] bg-gray-200 flex-1 mx-4 relative overflow-hidden">
-               <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-brand-blue to-transparent opacity-50"></div>
+               <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-red-500 to-transparent opacity-50"></div>
             </div>
             <div className="flex flex-col items-center opacity-50">
               <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-200 text-gray-500 flex items-center justify-center text-sm font-bold">2</div>
@@ -179,7 +179,7 @@ export function CartPage() {
               {/* Coupon */}
               <div className="animate-cart-summary bg-white rounded-2xl border border-gray-100 p-6 shadow-xl">
                 <div className="flex items-center gap-2 mb-4">
-                  <Tag className="w-5 h-5 text-brand-blue" />
+                  <Tag className="w-5 h-5 text-red-500" />
                   <span className="text-base font-bold text-gray-900">Apply Coupon</span>
                 </div>
                 {coupon ? (
@@ -204,10 +204,10 @@ export function CartPage() {
                         onChange={e => { setCouponCode(e.target.value.toUpperCase()); setCouponError(''); }}
                         onKeyDown={e => e.key === 'Enter' && handleApplyCoupon()}
                         placeholder="Enter coupon code"
-                        className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 font-medium focus:outline-none focus:border-brand-blue transition-all placeholder-gray-400 focus:bg-white"
+                        className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 font-medium focus:outline-none focus:border-red-500 transition-all placeholder-gray-400 focus:bg-white"
                       />
                       <button onClick={handleApplyCoupon} disabled={couponLoading || !couponCode.trim()}
-                        className="bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl hover:bg-blue-700 shadow-md transition-all disabled:opacity-50">
+                        className="bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition-all disabled:opacity-50 hover:scale-[1.02]">
                         {couponLoading ? '...' : 'APPLY'}
                       </button>
                     </div>
@@ -223,7 +223,7 @@ export function CartPage() {
           {/* Bill Details */}
           <div className="animate-cart-summary bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
             <h3 className="font-bold text-gray-900 mb-5 pb-4 border-b border-gray-100 text-lg flex items-center gap-2">
-              <span className="w-1.5 h-5 bg-brand-blue rounded-full inline-block"></span>
+              <span className="w-1.5 h-5 bg-red-500 rounded-full inline-block"></span>
               Price Details
             </h3>
             <div className="space-y-4">
@@ -245,12 +245,12 @@ export function CartPage() {
               )}
                 <div className="flex justify-between font-extrabold text-gray-900 text-xl pt-5 mt-4 border-t border-dashed border-gray-200">
                   <span>Grand Total</span>
-                  <span className="text-brand-blue glow-text">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-red-500 glow-text">₹{grandTotal.toFixed(2)}</span>
                 </div>
                 
                 <button 
                   onClick={handleCheckout}
-                  className="hidden lg:flex w-full mt-8 bg-brand-blue hover:bg-blue-700 text-white font-bold text-base rounded-xl py-4 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all items-center justify-center gap-2"
+                  className="hidden lg:flex w-full mt-8 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-base rounded-xl py-4 shadow-md hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition-all items-center justify-center gap-2"
                 >
                   Proceed to Checkout
                 </button>
@@ -271,7 +271,7 @@ export function CartPage() {
             </div>
             <button 
               onClick={handleCheckout}
-              className="flex-1 sm:max-w-md bg-brand-blue hover:bg-blue-700 text-white font-bold text-base rounded-xl py-4 shadow-md hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+              className="flex-1 sm:max-w-md bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-base rounded-xl py-4 shadow-md hover:-translate-y-1 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
             >
               Proceed to Checkout
               <span className="w-1.5 h-1.5 bg-white rounded-full mx-1 opacity-50" />

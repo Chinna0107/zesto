@@ -205,29 +205,29 @@ export function CheckoutPage() {
   const renderStepIndicator = () => (
     <div className="flex justify-between items-center mb-6 px-4 bg-white border border-gray-100 p-3 rounded-2xl shadow-sm">
       <div className="flex flex-col items-center cursor-pointer" onClick={() => navigate('/cart')}>
-        <div className="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center text-sm font-bold shadow-sm">✓</div>
-        <span className="text-[11px] text-brand-blue font-bold mt-2">Cart</span>
+        <div className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-sm font-bold shadow-sm">✓</div>
+        <span className="text-[11px] text-red-500 font-bold mt-2">Cart</span>
       </div>
-      <div className={`h-[2px] flex-1 mx-4 ${step >= 2 ? 'bg-brand-blue' : 'bg-gray-200'}`}></div>
+      <div className={`h-[2px] flex-1 mx-4 ${step >= 2 ? 'bg-red-500' : 'bg-gray-200'}`}></div>
       
       <div className="flex flex-col items-center">
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= 2 ? 'bg-brand-blue text-white shadow-sm' : 'bg-gray-50 text-gray-400 border border-gray-200'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= 2 ? 'bg-red-500 text-white shadow-sm' : 'bg-gray-50 text-gray-400 border border-gray-200'}`}>
           {step > 2 ? '✓' : (token ? '✓' : '1')}
         </div>
-        <span className={`text-[11px] font-bold mt-2 ${step >= 2 ? 'text-brand-blue' : 'text-gray-500'}`}>{token ? 'Auth' : 'Login'}</span>
+        <span className={`text-[11px] font-bold mt-2 ${step >= 2 ? 'text-red-500' : 'text-gray-500'}`}>{token ? 'Auth' : 'Login'}</span>
       </div>
-      <div className={`h-[2px] flex-1 mx-4 ${step >= 2 ? 'bg-brand-blue' : 'bg-gray-200'}`}></div>
+      <div className={`h-[2px] flex-1 mx-4 ${step >= 2 ? 'bg-red-500' : 'bg-gray-200'}`}></div>
 
       <div className="flex flex-col items-center">
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= 2 ? 'bg-brand-blue text-white shadow-sm' : 'bg-gray-50 text-gray-400 border border-gray-200'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= 2 ? 'bg-red-500 text-white shadow-sm' : 'bg-gray-50 text-gray-400 border border-gray-200'}`}>
           {step > 2 ? '✓' : '2'}
         </div>
-        <span className={`text-[11px] font-bold mt-2 ${step >= 2 ? 'text-brand-blue' : 'text-gray-500'}`}>Address</span>
+        <span className={`text-[11px] font-bold mt-2 ${step >= 2 ? 'text-red-500' : 'text-gray-500'}`}>Address</span>
       </div>
-      <div className={`h-[2px] flex-1 mx-4 ${step >= 3 ? 'bg-brand-blue' : 'bg-gray-200'}`}></div>
+      <div className={`h-[2px] flex-1 mx-4 ${step >= 3 ? 'bg-red-500' : 'bg-gray-200'}`}></div>
       <div className={`flex flex-col items-center ${step < 3 ? 'opacity-50' : ''}`}>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= 3 ? 'bg-brand-blue text-white shadow-sm' : 'bg-gray-50 text-gray-400 border border-gray-200'}`}>3</div>
-        <span className={`text-[11px] font-bold mt-2 ${step >= 3 ? 'text-brand-blue' : 'text-gray-500'}`}>Payment</span>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= 3 ? 'bg-red-500 text-white shadow-sm' : 'bg-gray-50 text-gray-400 border border-gray-200'}`}>3</div>
+        <span className={`text-[11px] font-bold mt-2 ${step >= 3 ? 'text-red-500' : 'text-gray-500'}`}>Payment</span>
       </div>
     </div>
   );
@@ -259,14 +259,14 @@ export function CheckoutPage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Login Option */}
-                  <div className="bg-blue-50 p-6 rounded-3xl shadow-sm border border-brand-blue/30 flex flex-col justify-between hover:border-brand-blue hover:shadow-md transition-all">
+                  <div className="bg-red-50 p-6 rounded-3xl shadow-sm border border-red-500/30 flex flex-col justify-between hover:border-red-500 hover:shadow-md transition-all">
                     <div>
                       <h3 className="font-bold text-xl text-gray-900 mb-3">Login / Sign Up</h3>
                       <p className="text-[15px] text-gray-600 mb-8 leading-relaxed">Access your saved addresses, track orders easily, and get exclusive offers.</p>
                     </div>
                     <button 
                       onClick={() => navigate('/login?redirect=/checkout')}
-                      className="w-full bg-brand-blue text-white font-bold py-4 rounded-xl shadow-md hover:bg-blue-700 transition-all hover:-translate-y-1"
+                      className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-4 rounded-xl shadow-md transition-all hover:-translate-y-1 hover:scale-[1.02]"
                     >
                       Login to Continue
                     </button>
@@ -411,7 +411,7 @@ export function CheckoutPage() {
           <div className="hidden lg:block lg:col-span-4 sticky top-24">
             <div className="bg-white p-6 rounded-3xl shadow-md border border-gray-100">
               <h3 className="font-bold text-gray-900 mb-6 text-xl flex items-center gap-2">
-                <span className="w-1.5 h-6 bg-brand-blue rounded-full inline-block"></span>
+                <span className="w-1.5 h-6 bg-red-500 rounded-full inline-block"></span>
                 Order Summary
               </h3>
               
@@ -433,7 +433,7 @@ export function CheckoutPage() {
               <div className="border-t border-dashed border-gray-200 pt-5 mb-6">
                 <div className="flex justify-between font-extrabold text-gray-900 text-xl">
                   <span>Grand Total</span>
-                  <span className="text-brand-blue">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-red-500">₹{grandTotal.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -447,7 +447,7 @@ export function CheckoutPage() {
               ) : step === 2 ? (
                 <button 
                   onClick={handleProceedToPayment}
-                  className="w-full bg-brand-blue text-white font-bold text-base rounded-xl py-4 shadow-md hover:bg-blue-700 hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-base rounded-xl py-4 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
                 >
                   Proceed to Payment
                 </button>

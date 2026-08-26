@@ -50,10 +50,10 @@ export function SignupPage() {
   const displayError = localError || error;
 
   return (
-    <div className="min-h-screen bg-transparent flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-zesto-gradient flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-orange/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-300/20 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10 relative z-10">
         
@@ -73,7 +73,7 @@ export function SignupPage() {
               <input
                 name="name" value={form.name} onChange={handleChange} required
                 placeholder="Your full name"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all bg-gray-50 hover:bg-white focus:bg-white placeholder-gray-400"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 transition-all bg-gray-50 hover:bg-white focus:bg-white placeholder-gray-400"
               />
             </div>
             <div>
@@ -81,7 +81,7 @@ export function SignupPage() {
               <input
                 name="email" type="email" value={form.email} onChange={handleChange} required
                 placeholder="you@example.com"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all bg-gray-50 hover:bg-white focus:bg-white placeholder-gray-400"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 transition-all bg-gray-50 hover:bg-white focus:bg-white placeholder-gray-400"
               />
             </div>
             <div>
@@ -89,7 +89,7 @@ export function SignupPage() {
               <input
                 name="phone" value={form.phone} onChange={handleChange} required
                 placeholder="+91 98765 43210"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all bg-gray-50 hover:bg-white focus:bg-white placeholder-gray-400"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 transition-all bg-gray-50 hover:bg-white focus:bg-white placeholder-gray-400"
               />
             </div>
             <div>
@@ -99,7 +99,7 @@ export function SignupPage() {
                   name="password" type={showPass ? 'text' : 'password'} value={form.password}
                   onChange={handleChange} required minLength={6}
                   placeholder="Min 6 characters"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all bg-gray-50 hover:bg-white focus:bg-white pr-12 placeholder-gray-400"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 transition-all bg-gray-50 hover:bg-white focus:bg-white pr-12 placeholder-gray-400"
                 />
                 <button type="button" onClick={() => setShowPass(!showPass)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-brand-orange transition-colors">
@@ -115,7 +115,7 @@ export function SignupPage() {
             )}
 
             <button type="submit" disabled={loading}
-              className="w-full bg-brand-blue text-white font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg hover:bg-blue-700 transition-all disabled:opacity-60 disabled:hover:shadow-md mt-2 hover:-translate-y-0.5">
+              className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg transition-all disabled:opacity-60 disabled:hover:shadow-md mt-2 hover:-translate-y-0.5 hover:scale-[1.02]">
               {loading ? 'Sending OTP...' : 'Send OTP'}
             </button>
           </form>
@@ -133,7 +133,7 @@ export function SignupPage() {
                   type="text" inputMode="numeric" maxLength={1} value={digit}
                   onChange={(e) => handleOtpChange(e.target.value, idx)}
                   onKeyDown={(e) => handleOtpKeyDown(e, idx)}
-                  className="w-10 h-12 text-center text-lg font-bold text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue bg-gray-50 hover:bg-white focus:bg-white"
+                  className="w-10 h-12 text-center text-lg font-bold text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 bg-gray-50 hover:bg-white focus:bg-white"
                 />
               ))}
             </div>
@@ -145,7 +145,7 @@ export function SignupPage() {
             )}
 
             <button type="submit" disabled={loading}
-              className="w-full bg-brand-blue text-white font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg hover:bg-blue-700 transition-all disabled:opacity-60 disabled:hover:shadow-md mt-2 hover:-translate-y-0.5">
+              className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3.5 rounded-xl text-sm shadow-md hover:shadow-lg transition-all disabled:opacity-60 disabled:hover:shadow-md mt-2 hover:-translate-y-0.5 hover:scale-[1.02]">
               {loading ? 'Verifying...' : 'Verify & Create Account'}
             </button>
             <button type="button" onClick={() => setStep('form')}
