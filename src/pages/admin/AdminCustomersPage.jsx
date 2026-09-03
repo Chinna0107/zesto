@@ -30,7 +30,7 @@ export function AdminCustomersPage() {
 
   if (loading) return (
     <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-4 border-gray-200 border-t-[#036e26] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-4 border-orange-100 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
 
@@ -60,10 +60,10 @@ export function AdminCustomersPage() {
                 <th className="text-left py-4 px-4 sm:px-6 font-semibold">Joined</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#036e26]/5">
+            <tbody className="divide-y divide-brand-orange/5">
               {filtered.map((customer, i) => (
                 <motion.tr key={customer.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02 }}
-                  className="hover:bg-gray-500 transition-colors">
+                  className="hover:bg-brand-orange/5 transition-colors group">
                   <td className="py-4 px-4 sm:px-6">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 font-bold">
@@ -72,11 +72,11 @@ export function AdminCustomersPage() {
                       <div>
                         <p className="font-semibold text-gray-900">{customer.name || "Unknown User"}</p>
                         {customer.is_verified ? (
-                          <span className="text-[10px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit mt-0.5">
+                          <span className="text-[10px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit mt-0.5 font-medium border border-green-100">
                             Verified
                           </span>
                         ) : (
-                          <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit mt-0.5">
+                          <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex items-center gap-1 w-fit mt-0.5 font-medium border border-gray-200">
                             Unverified
                           </span>
                         )}
@@ -94,8 +94,8 @@ export function AdminCustomersPage() {
                     )}
                   </td>
                   <td className="py-4 px-4 sm:px-6">
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                      customer.role === "admin" ? "bg-purple-100 text-purple-700" : "bg-blue-100 text-blue-700"
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
+                      customer.role === "admin" ? "bg-purple-50 text-purple-600 border-purple-100" : "bg-blue-50 text-blue-600 border-blue-100"
                     }`}>
                       {customer.role || "user"}
                     </span>

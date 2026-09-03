@@ -30,7 +30,6 @@ export function AdminOrdersPage() {
   const [expanded, setExpanded] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
   const [tracking, setTracking] = useState({});
-  const [shipping, setShipping] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -62,26 +61,7 @@ export function AdminOrdersPage() {
     setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, status } : o)));
   };
 
-  const createShipment = async (orderId) => {
-    const token = localStorage.getItem("token");
-    setShipping((p) => ({ ...p, [orderId]: true }));
-    try {
-      const res = await fetch(`${BACKEND_URL}/admin/orders/${orderId}/ship`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed. Backend shipment route might not be configured yet.");
-      
-      setOrders((prev) => prev.map((o) => o.id === orderId ? { ...o, tracking_id: data.awb, tracking_link: data.tracking_link, status: "shipped" } : o));
-      setTracking((p) => ({ ...p, [orderId]: { id: data.awb, link: data.tracking_link } }));
-      alert(`Shipment created! AWB: ${data.awb}`);
-    } catch (err) {
-      alert(`Shipment status: ${err.message}`);
-    } finally {
-      setShipping((p) => ({ ...p, [orderId]: false }));
-    }
-  };
+
 
   const notifyWhatsApp = (order) => {
     let address = {};
@@ -101,6 +81,14 @@ export function AdminOrdersPage() {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+
+  const parseAddress = (addressStr) => {
+    try {
+      return typeof addressStr === 'string' ? JSON.parse(addressStr) : (addressStr || {});
+    } catch(e) {
+      return {};
+    }
+  };
 
   const invoiceHtml = (order) => {
     let items = [];
@@ -356,7 +344,7 @@ export function AdminOrdersPage() {
 
   if (loading) return (
     <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-4 border-gray-200 border-t-[#036e26] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-4 border-orange-100 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
 
@@ -378,7 +366,7 @@ export function AdminOrdersPage() {
           <button key={s} onClick={() => setStatusFilter(s)}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-bold capitalize transition-colors ${
               statusFilter === s
-                ? "bg-[#fe6603] text-white hover:bg-[#e55c02] shadow-sm"
+                ? "bg-brand-orange text-white hover:opacity-90 shadow-sm"
                 : "bg-white border border-gray-200 text-gray-900/60 hover:border-brand-orange/40"
             }`}>
             {s === "all" ? `All (${orders.length})` : `${s} (${orders.filter(o => o.status === s).length})`}
@@ -419,51 +407,49 @@ export function AdminOrdersPage() {
                     {order.user_name || "Guest"}
                   </p>
                 </div>
-                <span className="font-bold text-[#D4AF37] text-sm sm:text-base lg:text-lg flex-shrink-0">₹{order.total}</span>
+                <span className="font-bold text-brand-orange text-sm sm:text-base lg:text-lg flex-shrink-0">₹{order.total}</span>
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform flex-shrink-0 ${expanded === order.id ? "rotate-180" : ""}`} />
               </div>
 
               {expanded === order.id && (
                 <div className="border-t border-brand-orange/5 p-3 sm:p-4 lg:p-5 space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2">Update Status</p>
-                      <select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl bg-white border border-gray-100 text-gray-900 text-sm focus:outline-none">
-                        {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-                      </select>
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2">Shipment</p>
-                      {order.tracking_id && order.tracking_id.trim() !== "" ? (
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl px-3 py-2">
-                            <span className="text-green-700 font-bold text-xs truncate">AWB: {order.tracking_id}</span>
-                            {order.tracking_link && (
-                              <a href={order.tracking_link} target="_blank" rel="noopener noreferrer"
-                                className="ml-auto flex-shrink-0 text-gray-900 hover:opacity-80 transition-colors">
-                                <ExternalLink className="w-3.5 h-3.5" />
-                              </a>
-                            )}
+                  <div className="mb-4">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2">Update Status</p>
+                    <select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)}
+                      className="w-full sm:w-1/2 px-3 py-2 rounded-xl bg-white border border-gray-100 text-gray-900 text-sm focus:outline-none">
+                      {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Customer Details */}
+                  <div className="bg-gray-50/50 rounded-xl p-4 border border-gray-100">
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2 font-bold">Customer Details</p>
+                    {(() => {
+                      const addr = parseAddress(order.address);
+                      return (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
+                          <div>
+                            <p><span className="font-semibold text-gray-900">Name:</span> {order.user_name || addr.name || "Guest"}</p>
+                            <p><span className="font-semibold text-gray-900">Phone:</span> {order.user_phone || addr.mobile || "N/A"}</p>
+                            <p><span className="font-semibold text-gray-900">Email:</span> {order.user_email || "N/A"}</p>
                           </div>
-                          <button onClick={() => createShipment(order.id)} disabled={shipping[order.id]}
-                            className="text-xs text-gray-500 hover:text-gray-900 transition-colors underline">
-                            Re-create shipment
-                          </button>
+                          <div>
+                            <p className="font-semibold text-gray-900 mb-1">Shipping Address:</p>
+                            <p className="text-xs leading-relaxed text-gray-600">
+                              {addr.line1 || "No address provided"}<br/>
+                              {addr.line2 && <>{addr.line2}<br/></>}
+                              {addr.city ? `${addr.city}, ` : ""}{addr.state} {addr.pincode}
+                            </p>
+                          </div>
                         </div>
-                      ) : (
-                        <button onClick={() => createShipment(order.id)} disabled={shipping[order.id]}
-                          className="w-full flex items-center justify-center gap-2 bg-gray-50 hover:bg-white/20 text-gray-900 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors disabled:opacity-50">
-                          {shipping[order.id] ? "Creating..." : "🚚 Create Shipment"}
-                        </button>
-                      )}
-                    </div>
+                      );
+                    })()}
                   </div>
 
                   {/* Action Buttons */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-brand-orange/5">
                     <button onClick={() => printLabel(order)}
-                      className="flex items-center justify-center gap-1.5 bg-[#fe6603] text-white hover:bg-[#e55c02] px-3 py-2.5 rounded-xl text-xs font-semibold hover:bg-white/80 transition-colors">
+                      className="flex items-center justify-center gap-1.5 bg-brand-orange text-white hover:opacity-90 px-3 py-2.5 rounded-xl text-xs font-semibold transition-colors">
                       <Printer className="w-3.5 h-3.5 flex-shrink-0" />
                       <span className="truncate">Print Label</span>
                     </button>
